@@ -1,0 +1,94 @@
+<div class="sudo-zone">
+
+  <div class="outer-zone upper-outer-zone"></div>
+  <div class="outer-zone lower-outer-zone"></div>
+  <div class="inner-zone">
+    
+    <div class="toothpick-column toothpick-column-3">
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+    </div>
+    <div class="toothpick-column toothpick-column-6" >
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+      <div class="toothpick" draggable="true">4 ================</div>
+      <div class="toothpick" draggable="true">5 ================</div>
+      <div class="toothpick" draggable="true">6 ================</div>
+    </div>
+    <div class="toothpick-column toothpick-column-9">
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+      <div class="toothpick" draggable="true">4 ================</div>
+      <div class="toothpick" draggable="true">5 ================</div>
+      <div class="toothpick" draggable="true">6 ================</div>
+      <div class="toothpick" draggable="true">7 ================</div>
+      <div class="toothpick" draggable="true">8 ================</div>
+      <div class="toothpick" draggable="true">9 ================</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+var targetEl = null;
+
+var handleEnd =  function (e) {
+  if (targetEl == null) return;
+
+  var toothpick = $(e.target);
+
+  console.log("toothpick index: ", toothpick.index());
+  console.log("toothpick from column", $(toothpick).parent().attr("class"));
+  console.log("toothpick target", $(targetEl).attr("class"));
+
+
+  if ($(targetEl).hasClass("upper-outer-zone")){
+    $(toothpick).parent().find(".toothpick:lt(" + (toothpick.index()+1) + ")").remove();
+  } else {
+    $(toothpick).parent().find(".toothpick:gt(" + (toothpick.index()-1) + ")").remove();
+  }
+
+
+};
+
+
+var handleDragOver =  function (e) {
+  targetEl = e.target;
+};
+
+function clearTarget(){
+  targetEl = null;
+};
+
+
+var handleDragStart = function(e){
+  clearTarget();
+};
+
+var handleDragEnterInnerZone = function (e) {
+    clearTarget();
+};
+
+
+[].forEach.call(document.querySelectorAll('.outer-zone'), function(col) {
+  col.addEventListener('dragover', handleDragOver, false);
+});
+
+[].forEach.call(document.querySelectorAll('.inner-zone'), function(col) {
+    col.addEventListener('dragenter', handleDragEnterInnerZone, false);
+});
+
+[].forEach.call(document.querySelectorAll('.toothpick'), function(col) {
+  col.addEventListener('dragstart', handleDragStart, false);
+  col.addEventListener('dragend', handleEnd, false);
+});
+
+</script>
+
+
+</html>
