@@ -1,23 +1,94 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="sudo-zone">
+
+  <div class="outer-zone upper-outer-zone"></div>
+  <div class="outer-zone lower-outer-zone"></div>
+  <div class="inner-zone">
+    
+    <div class="toothpick-column toothpick-column-3">
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+    </div>
+    <div class="toothpick-column toothpick-column-6" >
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+      <div class="toothpick" draggable="true">4 ================</div>
+      <div class="toothpick" draggable="true">5 ================</div>
+      <div class="toothpick" draggable="true">6 ================</div>
+    </div>
+    <div class="toothpick-column toothpick-column-9">
+      <div class="toothpick" draggable="true">1 ================</div>
+      <div class="toothpick" draggable="true">2 ================</div>
+      <div class="toothpick" draggable="true">3 ================</div>
+      <div class="toothpick" draggable="true">4 ================</div>
+      <div class="toothpick" draggable="true">5 ================</div>
+      <div class="toothpick" draggable="true">6 ================</div>
+      <div class="toothpick" draggable="true">7 ================</div>
+      <div class="toothpick" draggable="true">8 ================</div>
+      <div class="toothpick" draggable="true">9 ================</div>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<script>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+var targetEl = null;
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+var handleEnd =  function (e) {
+  if (targetEl == null) return;
+
+  var toothpick = $(e.target);
+
+  console.log("toothpick index: ", toothpick.index());
+  console.log("toothpick from column", $(toothpick).parent().attr("class"));
+  console.log("toothpick target", $(targetEl).attr("class"));
+
+
+  if ($(targetEl).hasClass("upper-outer-zone")){
+    $(toothpick).parent().find(".toothpick:lt(" + (toothpick.index()+1) + ")").remove();
+  } else {
+    $(toothpick).parent().find(".toothpick:gt(" + (toothpick.index()-1) + ")").remove();
+  }
+
+
+};
+
+
+var handleDragOver =  function (e) {
+  targetEl = e.target;
+};
+
+function clearTarget(){
+  targetEl = null;
+};
+
+
+var handleDragStart = function(e){
+  clearTarget();
+};
+
+var handleDragEnterInnerZone = function (e) {
+    clearTarget();
+};
+
+
+[].forEach.call(document.querySelectorAll('.outer-zone'), function(col) {
+  col.addEventListener('dragover', handleDragOver, false);
+});
+
+[].forEach.call(document.querySelectorAll('.inner-zone'), function(col) {
+    col.addEventListener('dragenter', handleDragEnterInnerZone, false);
+});
+
+[].forEach.call(document.querySelectorAll('.toothpick'), function(col) {
+  col.addEventListener('dragstart', handleDragStart, false);
+  col.addEventListener('dragend', handleEnd, false);
+});
+
+</script>
+
+
+</html>

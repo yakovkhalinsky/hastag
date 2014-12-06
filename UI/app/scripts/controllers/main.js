@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the uiApp
  */
-angular.module('uiApp')
+angular.module('ToothPickApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
