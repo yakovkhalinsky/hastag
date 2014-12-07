@@ -17,9 +17,10 @@ html
     body(ng-app="ToothpickApp" ng-controller="ToothpickController")
 
         div(class="sudo-zone")
-            div(style="position: absolute; margin: 20px;" ng-if="me.isTurn") Thats your turn
-            div(style="position: absolute; margin: 20px;" ng-if="!me.isTurn") Thats your opponent turn
-            div(style="position: absolute; margin: 20px;")
+            div(style="position: absolute; margin: 20px;" ng-if="me.gameStarted && me.isTurn") Thats your turn
+            div(style="position: absolute; margin: 20px;" ng-if="me.gameStarted && !me.isTurn") Thats your opponent turn
+            div(style="position: absolute; margin: 20px;" ng-if="me.gameRequired && !me.gameStarted") Waiting for someone
+            div(style="position: absolute; margin: 20px;" ng-if="!me.gameRequired")
                 button(ng-click="startGame()") Start
             div(class="outer-zone upper-outer-zone")
             div(class="outer-zone lower-outer-zone")

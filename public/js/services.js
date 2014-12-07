@@ -9,7 +9,9 @@ var ToothpickService = function($timeout) {
 	};
 
 	this.me = {
-		isTurn: false
+		isTurn: false,
+		gameRequired: false,
+		gameStarted: false
 	};
 
 	var socket = null;
@@ -37,20 +39,33 @@ var ToothpickService = function($timeout) {
 	this.startGame = function() {
 		socket = io();
 	
-		socket.on('start', function(msg){
+		socket.on('start', function(myTurn){
 			$timeout(function(){
-				console.log(msg);
-				service.me.isTurn = true;
+				// console.log('start, my turn:', myTurn);
+				service.me.isTurn = myTurn;
+				service.me.gameStarted = true;
 			});
 		});
 
 		socket.on('applyMovement', function(movement){
-			this.me.isTurn = true;
-			
-			//apply movement
-			this.columns.column3.splice(0, this.columns.column3.length + 1, movement.column3);
-			this.columns.column6.splice(0, this.columns.column6.length + 1, movement.column6);
-			this.columns.column9.splice(0, this.columns.column9.length + 1, movement.column9);
+			$timeout(function(){
+				service.me.isTurn = true;
+				console.log("movement.column3", Array.isArray(movement.column3), movement.column3);
+				//apply movement
+				service.columns.column3.length = 0;
+				movement.column3.forEach(function(i){service.columns.column3.push(i);});
+
+				service.columns.column6.length = 0;
+				movement.column6.forEach(function(i){service.columns.column6.push(i);});
+
+				service.columns.column9.length = 0;
+				movement.column9.forEach(function(i){service.columns.column9.push(i);});
+
+			});
+		});
+
+		$timeout(function(){
+			service.me.gameRequired = true;
 		});
 	};
 
