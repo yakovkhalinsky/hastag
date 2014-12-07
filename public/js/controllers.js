@@ -58,12 +58,13 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 	};
 
 	$scope.startGame = function(){
+		setUpDnDListeners();
 		toothpickService.startGame();
 	};
 
-	$(function(){
-		setUpDnDListeners();
-	});
+	
+		
+	
 };
 
 
