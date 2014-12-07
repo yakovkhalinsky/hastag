@@ -1,11 +1,18 @@
 var ToothpickController =  function($scope, $timeout, toothpickService) {
-	$scope.columns = {
-		'column3' : [1,2,3],
-	    'column6' : [1,2,3,4,5,6],
-		'column9' : [1,2,3,4,5,6,7,8,9]
-	}
-
+	
+	$scope.columns = toothpickService.columns;
+	
 	var targetEl = null;
+
+	var getColumnFromReference = function (domColumn){
+		if (domColumn.hasClass('toothpick-column-3')){
+			return 'column3';
+		} else if (domColumn.hasClass('toothpick-column-6')){
+			return 'column6';
+		} else if (domColumn.hasClass('toothpick-column-9')){
+			return 'column9';
+		}
+	};
 
 	var handleEnd =  function (e) {
 		if (targetEl == null) return;
@@ -17,31 +24,10 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 		console.log("toothpick target", $(targetEl).attr("class"));
 
 		$timeout(function(){
-			removeToothpicks(toothpick.index(), getColumnFromReference(toothpick.parent()), $(targetEl));	
+			toothpickService.removeToothpicks(toothpick.index(), 
+				getColumnFromReference(toothpick.parent()), 
+				$(targetEl).hasClass("upper-outer-zone"));	
 		});
-
-	};
-
-	var getColumnFromReference = function (domColumn){
-		if (domColumn.hasClass('toothpick-column-3')){
-			return $scope.columns.column3;
-		} else if (domColumn.hasClass('toothpick-column-6')){
-			return $scope.columns.column6;
-		} else if (domColumn.hasClass('toothpick-column-9')){
-			return $scope.columns.column9;
-		}
-	};
-
-
-	var removeToothpicks = function (toothpickIndex, toothpickColumn, targetZone) {
-
-		if (targetZone.hasClass("upper-outer-zone")){
-			//Remove all toothpicks from the beginning of column to picked item
-			toothpickColumn.splice(0, toothpickIndex + 1);
-		} else {
-			//Remove all toothpicks from the picked item to the end of column
-			toothpickColumn.splice(toothpickIndex, (toothpickColumn.length - toothpickIndex));
-		}
 
 	};
 
