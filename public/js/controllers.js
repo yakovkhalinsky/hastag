@@ -1,6 +1,7 @@
 var ToothpickController =  function($scope, $timeout, toothpickService) {
 	
 	$scope.columns = toothpickService.columns;
+	$scope.me = toothpickService.me;
 	
 	var targetEl = null;
 
@@ -32,7 +33,7 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 	};
 
 	var handleDragOver =  function (e) {
-	  targetEl = e.target;
+	  	targetEl = e.target;
 	};
 
 	var clearTarget = function (){

@@ -8,15 +8,11 @@ var ToothpickService = function() {
 		'column9' : [1,2,3,4,5,6,7,8,9]
 	};
 
-	var socket = io();
-
-	var getTurnObject = function(column3, column6, column9) {
-		return {
-			column3: column3,
-			column6: column6,
-			column9: column9
-		};
+	this.me = {
+		isTurn: false
 	};
+
+	var socket = io();
 
 	this.removeToothpicks = function (toothpickIndex, toothpickColumnName, upperZone) {
 
@@ -30,12 +26,27 @@ var ToothpickService = function() {
 			toothpickColumn.splice(toothpickIndex, (toothpickColumn.length - toothpickIndex));
 		}
 
+		service.sendMovement();
 	};
 
-
-	this.takeTurn = function(column3, column6, column9) {
-		socket.emit('turn', getTurnObject(column3, column6, column9));
+	this.sendMovement = function() {
+		this.me.isTurn = false;
+		socket.emit('applyMovement', service.columns);
 	};
+
+	socket.on('start', function(){
+		this.me.isTurn = true;
+	});
+
+	socket.on('applyMovement', function(movement){
+		this.me.isTurn = true;
+		
+		//apply movement
+		this.columns.column3.splice(0, this.columns.column3.length + 1, movement.column3);
+		this.columns.column6.splice(0, this.columns.column6.length + 1, movement.column6);
+		this.columns.column9.splice(0, this.columns.column9.length + 1, movement.column9);
+	});
+
 };
 
 angular.module('toothpick.services')

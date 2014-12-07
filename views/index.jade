@@ -17,6 +17,8 @@ html
     body(ng-app="ToothpickApp" ng-controller="ToothpickController")
 
         div(class="sudo-zone")
+            div(style="position: absolute; margin: 20px;" ng-if="me.isTurn") Thats your turn
+            div(style="position: absolute; margin: 20px;" ng-if="!me.isTurn") Thats your opponent turn
             div(class="outer-zone upper-outer-zone")
             div(class="outer-zone lower-outer-zone")
             div(class="inner-zone")
