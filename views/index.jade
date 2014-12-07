@@ -10,7 +10,9 @@ html
         script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-cookies.js')
 
         script(src='/socket.io/socket.io.js')
-        script(src='/js/engine.js')
+        script(src='/js/toothpick.js')
+        script(src='/js/services.js')
+        script(src='/js/controllers.js')                
 
     body(ng-app="ToothpickApp" ng-controller="ToothpickController")
 
@@ -19,10 +21,8 @@ html
             div(class="outer-zone lower-outer-zone")
             div(class="inner-zone")
                 div(class="toothpick-column toothpick-column-3")
-                    div(class="toothpick" draggable="true" ng-repeat="tp in column3") {{tp}}
-                    div
-                        button(ng-click='takeTurn()') take turn
+                    div(class="toothpick" draggable="true" ng-repeat="tp in columns.column3") {{tp}}
                 div(class="toothpick-column toothpick-column-6")
-                    div(class="toothpick" draggable="true" ng-repeat="tp in column6") {{tp}}
+                    div(class="toothpick" draggable="true" ng-repeat="tp in columns.column6") {{tp}}
                 div(class="toothpick-column toothpick-column-9")
-                    div(class="toothpick" draggable="true" ng-repeat="tp in column9") {{tp}}
+                    div(class="toothpick" draggable="true" ng-repeat="tp in columns.column9") {{tp}}
