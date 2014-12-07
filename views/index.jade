@@ -19,23 +19,8 @@ html
             div(class="outer-zone lower-outer-zone")
             div(class="inner-zone")
                 div(class="toothpick-column toothpick-column-3")
-                    div(class="toothpick" draggable="true") 1 ================
-                    div(class="toothpick" draggable="true") 2 ================
-                    div(class="toothpick" draggable="true") 3 ================
+                    div(class="toothpick" draggable="true" ng-repeat="tp in column3") {{tp}}
                 div(class="toothpick-column toothpick-column-6")
-                    div(class="toothpick" draggable="true") 1 ================
-                    div(class="toothpick" draggable="true") 2 ================
-                    div(class="toothpick" draggable="true") 3 ================
-                    div(class="toothpick" draggable="true") 4 ================
-                    div(class="toothpick" draggable="true") 5 ================
-                    div(class="toothpick" draggable="true") 6 ================
+                    div(class="toothpick" draggable="true" ng-repeat="tp in column6") {{tp}}
                 div(class="toothpick-column toothpick-column-9")
-                    div(class="toothpick" draggable="true") 1 ================
-                    div(class="toothpick" draggable="true") 2 ================
-                    div(class="toothpick" draggable="true") 3 ================
-                    div(class="toothpick" draggable="true") 4 ================
-                    div(class="toothpick" draggable="true") 5 ================
-                    div(class="toothpick" draggable="true") 6 ================
-                    div(class="toothpick" draggable="true") 7 ================
-                    div(class="toothpick" draggable="true") 8 ================
-                    div(class="toothpick" draggable="true") 9 ================
+                    div(class="toothpick" draggable="true" ng-repeat="tp in column9") {{tp}}
