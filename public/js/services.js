@@ -2,19 +2,9 @@ var ToothpickService = function($timeout) {
 	
 	var service = this;
 
-	this.columns = {
-		'column3' : [1,2,3],
-	    'column6' : [1,2,3,4,5,6],
-		'column9' : [1,2,3,4,5,6,7,8,9]
-	};
+	this.columns = {};
 
-	this.me = {
-		isTurn: false,
-		gameRequired: false,
-		gameStarted: false,
-		gameOver: false,
-		winner: false
-	};
+	this.me = {};
 
 	var socket = null;
 
@@ -71,6 +61,18 @@ var ToothpickService = function($timeout) {
 		return (service.columns.column3.length + service.columns.column6.length + service.columns.column9.length);
 	};
 
+	var initGame = function(){
+		service.columns.column3 = [1,2,3];
+		service.columns.column6 = [1,2,3,4,5,6];
+		service.columns.column9 = [1,2,3,4,5,6,7,8,9];
+
+		service.me.isTurn = false;
+		service.me.gameRequired = false;
+		service.me.gameStarted = false;
+		service.me.gameOver = false;
+		service.me.winner = false;
+	};
+
 	this.sendMovement = function() {
 		service.me.isTurn = false;
 		socket.emit('applyMovement', service.columns);
@@ -78,8 +80,6 @@ var ToothpickService = function($timeout) {
 
 	this.startGame = function() {
 		socket = io();
-	
-		service.me.gameOver = false;
 
 		socket.on('start', function(myTurn){
 			$timeout(function(){
@@ -119,9 +119,16 @@ var ToothpickService = function($timeout) {
 		});
 
 		$timeout(function(){
+			console.log("start clicked");
+			initGame();
 			service.me.gameRequired = true;
 		});
 	};
+
+	$timeout(function(){
+		console.log("initial");
+		initGame();
+	});
 
 };
 
