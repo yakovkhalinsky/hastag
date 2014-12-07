@@ -22,10 +22,11 @@
   },
   "homepage": "https://github.com/yakovkhalinsky/hastag",
   "dependencies": {
-    "express": "^4.10.4",
-    "socket.io": "^1.2.1",
     "bower": "1.3.8",
-    "jade": "^1.8.1"
+    "express": "^4.10.4",
+    "jade": "^1.8.1",
+    "node-uuid": "^1.4.2",
+    "socket.io": "^1.2.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
