@@ -37,11 +37,13 @@ body {
   width: 33%;
   text-align: center;
 }
-.toothpick {
+.toothpick,
+.tp {
   margin: 13px;
   font-size: 9px;
 }
-.toothpick img {
+.toothpick img,
+.tp img {
   width: 100%;
 }
 .message-container {
@@ -71,4 +73,29 @@ body {
 .splash button {
   font-size: 50px;
   margin-left: 15px;
+}
+.transparent {
+  opacity: 0.5;
+}
+.tp-enter {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -ms-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  opacity: 0;
+}
+.tp-enter.tp-enter-active {
+  opacity: 1;
+}
+.tp-leave {
+  -webkit-transition: 12s linear all;
+  -moz-transition: 12s linear all;
+  -ms-transition: 12s linear all;
+  -o-transition: 12s linear all;
+  transition: 12s linear all;
+  opacity: 1;
+}
+.tp-leave.tp-leave-active {
+  opacity: 0;
 }
