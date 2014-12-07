@@ -11,7 +11,7 @@ var io = require('socket.io').listen(server);
 var bodyHandler = require('./lib/body');
 
 app.use(bodyHandler);
-app.use(express.static(__dirname, '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.set('view engine', 'jade');
 

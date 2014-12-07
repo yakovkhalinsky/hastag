@@ -4,9 +4,38 @@ html
         title hashtag :: Koding 2014 Hackathon Challenge
 
         link(rel='stylesheet' href='/css/styles.css' type='text/css')
+        
+        script(src='/js/jquery-2.1.1.min.js')
+        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js')
+
         script(src='/socket.io/socket.io.js')
         script(src='/js/hashtag.js')
+        script(src='/js/engine.js')
 
-    body
+    body(ng-app="ToothpickApp" ng-controller="ToothpickController")
 
-        h1 hashtag
+        div(class="sudo-zone")
+            div(class="outer-zone upper-outer-zone")
+            div(class="outer-zone lower-outer-zone")
+            div(class="inner-zone")
+                div(class="toothpick-column toothpick-column-3")
+                    div(class="toothpick" draggable="true") 1 ================
+                    div(class="toothpick" draggable="true") 2 ================
+                    div(class="toothpick" draggable="true") 3 ================
+                div(class="toothpick-column toothpick-column-6")
+                    div(class="toothpick" draggable="true") 1 ================
+                    div(class="toothpick" draggable="true") 2 ================
+                    div(class="toothpick" draggable="true") 3 ================
+                    div(class="toothpick" draggable="true") 4 ================
+                    div(class="toothpick" draggable="true") 5 ================
+                    div(class="toothpick" draggable="true") 6 ================
+                div(class="toothpick-column toothpick-column-9")
+                    div(class="toothpick" draggable="true") 1 ================
+                    div(class="toothpick" draggable="true") 2 ================
+                    div(class="toothpick" draggable="true") 3 ================
+                    div(class="toothpick" draggable="true") 4 ================
+                    div(class="toothpick" draggable="true") 5 ================
+                    div(class="toothpick" draggable="true") 6 ================
+                    div(class="toothpick" draggable="true") 7 ================
+                    div(class="toothpick" draggable="true") 8 ================
+                    div(class="toothpick" draggable="true") 9 ================
