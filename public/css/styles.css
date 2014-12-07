@@ -7,6 +7,7 @@ body {
 }
 .sudo-zone {
   height: 100%;
+  min-height: 400px;
 }
 .upper-outer-zone {
   background-color: #F0DBB4;
@@ -28,6 +29,8 @@ body {
   top: 20%;
   left: 20%;
   border: 5px solid #8B572A;
+  border-radius: 5px;
+  min-height: 240px;
 }
 .toothpick-column {
   float: left;
@@ -35,8 +38,9 @@ body {
   text-align: center;
 }
 .toothpick {
-  background-color: #F5A623;
-  height: 10px;
   margin: 13px;
   font-size: 9px;
+}
+.toothpick img {
+  width: 100%;
 }

@@ -20,13 +20,13 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 
 		var toothpick = $(e.target);
 
-		console.log("toothpick index: ", toothpick.index());
-		console.log("toothpick from column", $(toothpick).parent().attr("class"));
+		console.log("toothpick index: ", toothpick.parent().index());
+		console.log("toothpick from column", $(toothpick).parent().parent().attr("class"));
 		console.log("toothpick target", $(targetEl).attr("class"));
 
 		$timeout(function(){
-			toothpickService.removeToothpicks(toothpick.index(), 
-				getColumnFromReference(toothpick.parent()), 
+			toothpickService.removeToothpicks(toothpick.parent().index(),
+				getColumnFromReference(toothpick.parent().parent()),
 				$(targetEl).hasClass("upper-outer-zone"));	
 		});
 
