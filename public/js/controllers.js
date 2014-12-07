@@ -19,7 +19,6 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 		if (!$scope.me.isTurn || targetEl == null) return;
 
 		var toothpick = $(e.target);
-		toothpick.removeClass('transparent');
 
 		console.log("toothpick index: ", toothpick.parent().index());
 		console.log("toothpick from column", $(toothpick).parent().parent().attr("class"));
@@ -37,10 +36,7 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 	  	targetEl = e.target;
 	};
 
-	var clearTarget = function (e){
-		if($(e.target).hasClass('toothpick')){
-			$(e.target).addClass('transparent');
-		}
+	var clearTarget = function (){
 		targetEl = null;
 	};
 
