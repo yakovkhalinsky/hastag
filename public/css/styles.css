@@ -71,7 +71,8 @@ body {
   padding: 5px 10px;
 }
 .splash button {
-  font-size: 50px;
+  font-size: 30px;
+  font-weight: bold;
   margin-left: 15px;
 }
 .transparent {

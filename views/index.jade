@@ -19,9 +19,11 @@ html
     body(ng-app="ToothpickApp" ng-controller="ToothpickController")
 
         div(class="message-container")
-            div(ng-if="me.gameStarted && me.isTurn") Thats your turn
-            div(ng-if="me.gameStarted && !me.isTurn") Thats your opponent turn
+            div(ng-if="me.gameStarted && me.isTurn && !me.gameOver" class="turn-status") Thats your turn
+            div(ng-if="me.gameStarted && !me.isTurn && !me.gameOver" class="turn-status") Thats your opponent turn
             div(ng-if="me.gameRequired && !me.gameStarted") Waiting for someone
+            div(ng-if="me.gameOver && me.winner") You win!
+            div(ng-if="me.gameOver && !me.winner") You loser!
 
         div(class="sudo-zone")
             div(class="outer-zone upper-outer-zone")
@@ -42,7 +44,7 @@ html
                 div(class="splash-rule") Pick as many toothpicks from a pile at a time
                 div(class="splash-rule") The one who picks the last toothpick loses
                 
-                div(ng-if="me.gameOver && me.winner") You win!
-                div(ng-if="me.gameOver && !me.winner") You loser!
-    
-                button(ng-click="startGame()") Start
+
+
+                button(ng-click="startGame()" ng-if="!me.gameOver") Start
+                button(ng-click="startGame()" ng-if="me.gameOver") Play Again
