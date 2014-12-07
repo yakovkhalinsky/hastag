@@ -27,7 +27,7 @@ module.exports = function (grunt) {
             dev: {
                 script: 'index.js',
                 options: {
-                    watch: ['index.js']
+                    watch: ['index.js', 'lib/**/*.js']
                 }
             }
         },
