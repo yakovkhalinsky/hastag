@@ -20,8 +20,13 @@ html
             div(style="position: absolute; margin: 20px;" ng-if="me.gameStarted && me.isTurn") Thats your turn
             div(style="position: absolute; margin: 20px;" ng-if="me.gameStarted && !me.isTurn") Thats your opponent turn
             div(style="position: absolute; margin: 20px;" ng-if="me.gameRequired && !me.gameStarted") Waiting for someone
-            div(style="position: absolute; margin: 20px;" ng-if="!me.gameRequired")
+            div(style="position: absolute; margin: 20px;" ng-if="!me.gameRequired || me.gameOver")
                 button(ng-click="startGame()") Start
+
+            div(style="position: absolute; margin: 20px;" ng-if="me.gameOver")
+                div(style="position: absolute; margin: 20px;" ng-if="me.winner") You win!
+                div(style="position: absolute; margin: 20px;" ng-if="!me.winner") You loser!
+
             div(class="outer-zone upper-outer-zone")
             div(class="outer-zone lower-outer-zone")
             div(class="inner-zone")

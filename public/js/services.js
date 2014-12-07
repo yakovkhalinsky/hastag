@@ -11,7 +11,9 @@ var ToothpickService = function($timeout) {
 	this.me = {
 		isTurn: false,
 		gameRequired: false,
-		gameStarted: false
+		gameStarted: false,
+		gameOver: false,
+		winner: false
 	};
 
 	var socket = null;
@@ -28,17 +30,57 @@ var ToothpickService = function($timeout) {
 			toothpickColumn.splice(toothpickIndex, (toothpickColumn.length - toothpickIndex));
 		}
 
+		checkFinalCondition(service.me.isTurn);
+		
 		service.sendMovement();
+	
+	};
+
+	var checkFinalCondition = function(myTurn){
+		if (areColumnsEmpty()){
+			$timeout(function(){
+				setGameOver(myTurn ? false : true);
+			});
+			return;
+		}
+	
+		if (justOneLeft()){
+			$timeout(function(){
+				setGameOver(myTurn ? true : false);
+			});
+			return;
+		}
+
+	};
+
+	var setGameOver = function(winner) {
+		service.me.winner = winner;
+		service.me.gameOver = true;
+		service.me.isTurn = false;
+	};
+
+	var areColumnsEmpty = function(){
+		return !toothpicksLeft();
+	};
+
+	var justOneLeft = function(){
+		return toothpicksLeft()===1;
+	};
+
+	var toothpicksLeft = function(){
+		return (service.columns.column3.length + service.columns.column6.length + service.columns.column9.length);
 	};
 
 	this.sendMovement = function() {
-		this.me.isTurn = false;
+		service.me.isTurn = false;
 		socket.emit('applyMovement', service.columns);
 	};
 
 	this.startGame = function() {
 		socket = io();
 	
+		service.me.gameOver = false;
+
 		socket.on('start', function(myTurn){
 			$timeout(function(){
 				// console.log('start, my turn:', myTurn);
@@ -49,7 +91,7 @@ var ToothpickService = function($timeout) {
 
 		socket.on('applyMovement', function(movement){
 			$timeout(function(){
-				service.me.isTurn = true;
+				
 				console.log("movement.column3", Array.isArray(movement.column3), movement.column3);
 				//apply movement
 				service.columns.column3.length = 0;
@@ -61,6 +103,18 @@ var ToothpickService = function($timeout) {
 				service.columns.column9.length = 0;
 				movement.column9.forEach(function(i){service.columns.column9.push(i);});
 
+				checkFinalCondition(service.me.isTurn);
+
+				service.me.isTurn = true;
+
+			});
+		});
+
+		socket.on('playerLeft', function(myTurn){
+			$timeout(function(){
+				service.me.isTurn = false;
+				service.me.gameOver = true;
+				service.me.winner = true;
 			});
 		});
 
