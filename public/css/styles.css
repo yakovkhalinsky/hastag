@@ -45,6 +45,12 @@ body {
   width: 100%;
 }
 .message-container {
+  width: 55%;
   position: absolute;
-  margin: 20px;
+  top: 25px;
+  margin: 25px;
+  left: 20%;
+  font-family: Helvetica HelveticaNeue;
+  font-size: 34px;
+  text-align: center;
 }

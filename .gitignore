@@ -1,5 +1,4 @@
 node_modules
 .idea
 sketch
-UI/node_modules
-UI/bower_components
+public/css/styles.css
