@@ -5,6 +5,8 @@ html
 
         link(rel='stylesheet' href='/css/styles.css' type='text/css')
 
+        link(href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css')
+
         script(src='/js/jquery-2.1.1.min.js')
         script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js')
         script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-cookies.js')
@@ -20,11 +22,8 @@ html
             div(ng-if="me.gameStarted && me.isTurn") Thats your turn
             div(ng-if="me.gameStarted && !me.isTurn") Thats your opponent turn
             div(ng-if="me.gameRequired && !me.gameStarted") Waiting for someone
-            div(ng-if="!me.gameRequired || me.gameOver")
-                button(ng-click="startGame()") Start
         
-            div(ng-if="me.gameOver && me.winner") You win!
-            div(ng-if="me.gameOver && !me.winner") You loser!
+
 
         div(class="sudo-zone")
             div(class="outer-zone upper-outer-zone")
@@ -39,3 +38,13 @@ html
                 div(class="toothpick-column toothpick-column-9")
                     div(class="toothpick" draggable="{{me.isTurn}}" ng-repeat="tp in columns.column9")
                         img(src="/images/toothpick_1024.png")
+
+            div(class="inner-zone splash" ng-if="!me.gameRequired || me.gameOver")
+                div(class="splash-head") 2 simple rules
+                div(class="splash-rule") Pick as many toothpicks from a pile at a time
+                div(class="splash-rule") The one who picks the last toothpick loses
+                
+                div(ng-if="me.gameOver && me.winner") You win!
+                div(ng-if="me.gameOver && !me.winner") You loser!
+    
+                button(ng-click="startGame()") Start

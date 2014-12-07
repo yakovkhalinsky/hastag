@@ -54,3 +54,21 @@ body {
   font-size: 34px;
   text-align: center;
 }
+.splash {
+  opacity: .8;
+  font-family: 'Josefin Sans' !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+}
+.splash .splash-head {
+  font-weight: bolder;
+  padding: 10px;
+}
+.splash .splash-rule {
+  padding: 5px 10px;
+}
+.splash button {
+  font-size: 50px;
+  margin-left: 15px;
+}
