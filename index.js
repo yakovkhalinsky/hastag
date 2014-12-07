@@ -8,7 +8,7 @@ var port = process.env.PORT || 3000;
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-//var sockets = require('./lib/sockets')(io);
+var sockets = require('./lib/sockets')(io);
 
 var bodyHandler = require('./lib/body');
 

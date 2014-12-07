@@ -1,4 +1,4 @@
-var ToothpickService = function() {
+var ToothpickService = function($timeout) {
 	
 	var service = this;
 
@@ -9,10 +9,10 @@ var ToothpickService = function() {
 	};
 
 	this.me = {
-		isTurn: true
+		isTurn: false
 	};
 
-	var socket = io();
+	var socket = null;
 
 	this.removeToothpicks = function (toothpickIndex, toothpickColumnName, upperZone) {
 
@@ -34,20 +34,27 @@ var ToothpickService = function() {
 		socket.emit('applyMovement', service.columns);
 	};
 
-	socket.on('start', function(){
-		this.me.isTurn = true;
-	});
+	this.startGame = function() {
+		socket = io();
+	
+		socket.on('start', function(msg){
+			$timeout(function(){
+				console.log(msg);
+				service.me.isTurn = true;
+			});
+		});
 
-	socket.on('applyMovement', function(movement){
-		this.me.isTurn = true;
-		
-		//apply movement
-		this.columns.column3.splice(0, this.columns.column3.length + 1, movement.column3);
-		this.columns.column6.splice(0, this.columns.column6.length + 1, movement.column6);
-		this.columns.column9.splice(0, this.columns.column9.length + 1, movement.column9);
-	});
+		socket.on('applyMovement', function(movement){
+			this.me.isTurn = true;
+			
+			//apply movement
+			this.columns.column3.splice(0, this.columns.column3.length + 1, movement.column3);
+			this.columns.column6.splice(0, this.columns.column6.length + 1, movement.column6);
+			this.columns.column9.splice(0, this.columns.column9.length + 1, movement.column9);
+		});
+	};
 
 };
 
 angular.module('toothpick.services')
-	.service('ToothpickService', ToothpickService);
+	.service('ToothpickService', ['$timeout', ToothpickService]);
