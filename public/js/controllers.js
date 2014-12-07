@@ -16,7 +16,7 @@ var ToothpickController =  function($scope, $timeout, toothpickService) {
 	};
 
 	var handleEnd =  function (e) {
-		if (targetEl == null) return;
+		if (!$scope.me.isTurn || targetEl == null) return;
 
 		var toothpick = $(e.target);
 

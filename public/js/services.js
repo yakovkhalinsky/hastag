@@ -9,7 +9,7 @@ var ToothpickService = function() {
 	};
 
 	this.me = {
-		isTurn: false
+		isTurn: true
 	};
 
 	var socket = io();
